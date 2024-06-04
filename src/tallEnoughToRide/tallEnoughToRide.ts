@@ -8,8 +8,9 @@ export type Visitor = {
 	age: number;
 	height: number;
 };
+export type Visitors = Visitor[];
 
-export function canRide(visitor: Visitor) {
+function canVisitorRide(visitor: Visitor) {
 	const isAdult = visitor.age >= 18;
 	const isOldEnough = visitor.age > 4;
 	const isTallEnough = visitor.height >= 1.4;
@@ -19,6 +20,12 @@ export function canRide(visitor: Visitor) {
 	}
 
 	return true;
+}
+export function canRide(visitors: Visitors): boolean[] {
+	const canVisitorsRideResults = visitors.map((visitor) =>
+		canVisitorRide(visitor)
+	);
+	return canVisitorsRideResults;
 }
 
 // if visitor is above 4 yo and accompanied by an adult, they can ride regardless of height.
