@@ -10,20 +10,23 @@ export type Visitor = {
 };
 export type Visitors = Visitor[];
 
-function canVisitorRide(visitor: Visitor) {
+function canVisitorRide(visitor: Visitor, isAccompaniedWithAdult: boolean) {
 	const isAdult = visitor.age >= 18;
 	const isOldEnough = visitor.age > 4;
 	const isTallEnough = visitor.height >= 1.4;
-
-	if (!isAdult && (!isOldEnough || !isTallEnough)) {
+	if (
+		!isAdult &&
+		(!isOldEnough || (!isTallEnough && !isAccompaniedWithAdult))
+	) {
 		return false;
 	}
 
 	return true;
 }
 export function canRide(visitors: Visitors): boolean[] {
+	const isAccompaniedWithAdult = visitors.find((visitor) => visitor.age >= 18);
 	const canVisitorsRideResults = visitors.map((visitor) =>
-		canVisitorRide(visitor)
+		canVisitorRide(visitor, isAccompaniedWithAdult ? true : false)
 	);
 	return canVisitorsRideResults;
 }
