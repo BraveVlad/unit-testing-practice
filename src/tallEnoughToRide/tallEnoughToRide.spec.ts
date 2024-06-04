@@ -23,15 +23,15 @@ import { canRide } from "./tallEnoughToRide";
 // });
 
 fdescribe.each([
-	[{ age: 3, height: 1.5 }, false],
-	[{ age: 4, height: 1.5 }, false],
-	[{ age: 5, height: 1.3 }, false],
-	[{ age: 5, height: 1.4 }, true],
-	[{ age: 21, height: 1.3 }, true],
-])(`CanRide`, (visitor, expected) => {
-	test(`age: ${visitor.age} and height: ${visitor.height} can ride: ${expected}`, () => {
-		expect(canRide({ age: visitor.age, height: visitor.height })).toBe(
-			expected
+	[[{ age: 3, height: 1.5 }], [false]],
+	[[{ age: 4, height: 1.5 }], [false]],
+	[[{ age: 5, height: 1.3 }], [false]],
+	[[{ age: 5, height: 1.4 }], [true]],
+	[[{ age: 21, height: 1.3 }], [true]],
+])(`CanRide`, (visitors, expected) => {
+	test(`age: ${visitors[0].age} and height: ${visitors[0].height} can ride: ${expected[0]}`, () => {
+		expect(canRide({ age: visitors[0].age, height: visitors[0].height })).toBe(
+			expected[0]
 		);
 	});
 });
