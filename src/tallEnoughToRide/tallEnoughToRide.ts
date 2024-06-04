@@ -24,9 +24,11 @@ function canVisitorRide(visitor: Visitor, isAccompaniedWithAdult: boolean) {
 	return true;
 }
 export function canRide(visitors: Visitors): boolean[] {
-	const isAccompaniedWithAdult = visitors.find((visitor) => visitor.age >= 18);
+	const isAccompaniedWithAdult = visitors.find((visitor) => visitor.age >= 18)
+		? true
+		: false;
 	const canVisitorsRideResults = visitors.map((visitor) =>
-		canVisitorRide(visitor, isAccompaniedWithAdult ? true : false)
+		canVisitorRide(visitor, isAccompaniedWithAdult)
 	);
 	return canVisitorsRideResults;
 }
