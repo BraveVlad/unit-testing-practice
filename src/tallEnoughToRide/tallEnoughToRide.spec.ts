@@ -1,4 +1,4 @@
-import { canRide } from "./tallEnoughToRide";
+import { Visitor, canRide } from "./tallEnoughToRide";
 
 // fdescribe("canRide", () => {
 // 	it("can't ride when age is under 4", () => {
@@ -22,6 +22,11 @@ import { canRide } from "./tallEnoughToRide";
 // 	});
 // });
 
+function mapVisitorsAndExpectedResults(
+	visitors: Visitor[],
+	expected: boolean[]
+) {}
+
 fdescribe.each([
 	[[{ age: 3, height: 1.5 }], [false]],
 	[[{ age: 4, height: 1.5 }], [false]],
@@ -29,7 +34,10 @@ fdescribe.each([
 	[[{ age: 5, height: 1.4 }], [true]],
 	[[{ age: 21, height: 1.3 }], [true]],
 ])(`CanRide`, (visitors, expected) => {
-	test(`age: ${visitors[0].age} and height: ${visitors[0].height} can ride: ${expected[0]}`, () => {
+	test(`visitors: ${visitors.map(
+		(visitor, index) =>
+			`\nVisitor ${index} age ${visitor.age} height ${visitor.height} can ride: ${expected[index]}`
+	)}`, () => {
 		expect(canRide({ age: visitors[0].age, height: visitors[0].height })).toBe(
 			expected[0]
 		);

@@ -4,21 +4,21 @@
 // 2. Write code to make the test pass
 // 3. Repeat
 
-type Visitor = {
-    age: number,
-    height: number
+export type Visitor = {
+	age: number;
+	height: number;
 };
 
 export function canRide(visitor: Visitor) {
-    const isAdult = visitor.age >= 18;
-    const isOldEnough = visitor.age > 4;
-    const isTallEnough = visitor.height >= 1.4;
+	const isAdult = visitor.age >= 18;
+	const isOldEnough = visitor.age > 4;
+	const isTallEnough = visitor.height >= 1.4;
 
-    if (!isAdult && (!isOldEnough || !isTallEnough)) {
-        return false;
-    }
+	if (!isAdult && (!isOldEnough || !isTallEnough)) {
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 // if visitor is above 4 yo and accompanied by an adult, they can ride regardless of height.
