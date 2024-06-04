@@ -21,7 +21,7 @@ fdescribe("canRide", () => {
 		expect(canRide([{ age: 21, height: 1.3 }])).toEqual([true]);
 	});
 
-	it("CAN'T ride when age is under 4 when accompanied with adult.", () => {
+	it("CAN'T ride when age is under 4 when accompanied with adult, even if tall enough.", () => {
 		expect(
 			canRide([
 				{ age: 3, height: 1.5 },
@@ -30,23 +30,49 @@ fdescribe("canRide", () => {
 		).toEqual([false, true]);
 	});
 
-	it("CAN ride when age is above 4 but height is below 1.4 when accompanied with adult.", () => {
+	it("CAN ride when age is above 4 but height is below 1.4 when accompanied with adult. any other minor CAN'T ride.", () => {
 		expect(
 			canRide([
 				{ age: 5, height: 1.2 },
+				{ age: 3, height: 1.2 },
+				{ age: 3, height: 1.5 },
 				{ age: 18, height: 1.5 },
 			])
-		).toEqual([true, true]);
+		).toEqual([true, false, false, true]);
 	});
-	it("CAN ride when age is above 4 but height is above 1.4 when accompanied with adult.", () => {
+
+	it("CAN ride when age is above 4 but height is above 1.4 when accompanied with adult. any other minor CAN'T ride.", () => {
 		expect(
 			canRide([
 				{ age: 5, height: 1.6 },
+				{ age: 3, height: 1.2 },
+				{ age: 3, height: 1.5 },
 				{ age: 18, height: 1.5 },
 			])
-		).toEqual([true, true]);
+		).toEqual([true, false, false, true]);
 	});
 });
+
+/*
+not adult, above 4 , under 1.4 with no adult = can't ride
+        =true, return false=
+            =1=
+    1                   -1-
+    1           0                          -1-
+    1           0                   1               1
+    !0          !1                  !0              !0
+!isAdult && (!isOldEnough || (!isTallEnough && !isAccompaniedWithAdult))
+*/
+/*
+not adult, above 4 , under 1.4 with  adult = can ride
+        =false, return true=
+            =0=
+    1                   -0-
+    1           0                           -0-
+    1           0                   1               0
+    !0          !1                 !0               !1
+!isAdult && (!isOldEnough || (!isTallEnough && !isAccompaniedWithAdult))
+*/
 
 // fdescribe.each([
 // 	[[{ age: 3, height: 1.5 }], [false]],
