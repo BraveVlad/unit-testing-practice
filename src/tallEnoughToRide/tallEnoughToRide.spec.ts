@@ -28,17 +28,17 @@ function mapVisitorsAndExpectedResults(
 ) {}
 
 fdescribe.each([
-	// [[{ age: 3, height: 1.5 }], [false]],
-	// [[{ age: 4, height: 1.5 }], [false]],
-	// [[{ age: 5, height: 1.3 }], [false]],
-	// [[{ age: 5, height: 1.4 }], [true]],
-	// [[{ age: 21, height: 1.3 }], [true]],
-	// FAILING TESTS
-	[[{ age: 3, height: 1.5 }], [true]],
-	[[{ age: 4, height: 1.5 }], [true]],
-	[[{ age: 5, height: 1.3 }], [true]],
-	[[{ age: 5, height: 1.4 }], [false]],
+	[[{ age: 3, height: 1.5 }], [false]],
+	[[{ age: 4, height: 1.5 }], [false]],
+	[[{ age: 5, height: 1.3 }], [false]],
+	[[{ age: 5, height: 1.4 }], [true]],
 	[[{ age: 21, height: 1.3 }], [true]],
+	// FAILING TESTS
+	// [[{ age: 3, height: 1.5 }], [true]],
+	// [[{ age: 4, height: 1.5 }], [true]],
+	// [[{ age: 5, height: 1.3 }], [true]],
+	// [[{ age: 5, height: 1.4 }], [false]],
+	// [[{ age: 21, height: 1.3 }], [true]],
 ])(`CanRide`, (visitors, expected) => {
 	test(`Visitors (total: ${visitors.length}): 
     ${visitors.map(
