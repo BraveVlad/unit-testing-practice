@@ -1,24 +1,50 @@
 import { Visitors, canRide } from "./tallEnoughToRide";
 
 fdescribe("canRide", () => {
-	it("can't ride when age is under 4", () => {
-		expect(canRide([{ age: 3, height: 1.5 }])).toStrictEqual([false]);
+	it("CAN'T ride when age is under 4", () => {
+		expect(canRide([{ age: 3, height: 1.5 }])).toEqual([false]);
 	});
 
-	it("can't ride when age is 4", () => {
-		expect(canRide([{ age: 4, height: 1.5 }])).toStrictEqual([false]);
+	it("CAN'T ride when age is 4", () => {
+		expect(canRide([{ age: 4, height: 1.5 }])).toEqual([false]);
 	});
 
-	it("can't ride when age is above 4 and height is below 1.4", () => {
-		expect(canRide([{ age: 5, height: 1.3 }])).toStrictEqual([false]);
+	it("CAN'T ride when age is above 4 and height is below 1.4", () => {
+		expect(canRide([{ age: 5, height: 1.3 }])).toEqual([false]);
 	});
 
-	it("can ride when age is above 4 and height is 1.4", () => {
-		expect(canRide([{ age: 5, height: 1.4 }])).toStrictEqual([true]);
+	it("CAN ride when age is above 4 and height is 1.4", () => {
+		expect(canRide([{ age: 5, height: 1.4 }])).toEqual([true]);
 	});
 
-	it("can ride when age is above 18 and height is below 1.4", () => {
-		expect(canRide([{ age: 21, height: 1.3 }])).toStrictEqual([true]);
+	it("CAN ride when age is above 18 and height is below 1.4", () => {
+		expect(canRide([{ age: 21, height: 1.3 }])).toEqual([true]);
+	});
+
+	it("CAN'T ride when age is under 4 when accompanied with adult.", () => {
+		expect(
+			canRide([
+				{ age: 3, height: 1.5 },
+				{ age: 18, height: 1.5 },
+			])
+		).toEqual([false, true]);
+	});
+
+	it("CAN ride when age is above 4 but height is below 1.4 when accompanied with adult.", () => {
+		expect(
+			canRide([
+				{ age: 5, height: 1.2 },
+				{ age: 18, height: 1.5 },
+			])
+		).toEqual([true, true]);
+	});
+	it("CAN ride when age is above 4 but height is above 1.4 when accompanied with adult.", () => {
+		expect(
+			canRide([
+				{ age: 5, height: 1.6 },
+				{ age: 18, height: 1.5 },
+			])
+		).toEqual([true, true]);
 	});
 });
 
