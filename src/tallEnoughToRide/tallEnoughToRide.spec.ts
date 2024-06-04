@@ -1,4 +1,4 @@
-import { Visitor, canRide } from "./tallEnoughToRide";
+import { Visitors, canRide } from "./tallEnoughToRide";
 
 // fdescribe("canRide", () => {
 // 	it("can't ride when age is under 4", () => {
@@ -23,23 +23,30 @@ import { Visitor, canRide } from "./tallEnoughToRide";
 // });
 
 function mapVisitorsAndExpectedResults(
-	visitors: Visitor[],
+	visitors: Visitors,
 	expected: boolean[]
 ) {}
 
 fdescribe.each([
-	[[{ age: 3, height: 1.5 }], [false]],
-	[[{ age: 4, height: 1.5 }], [false]],
-	[[{ age: 5, height: 1.3 }], [false]],
-	[[{ age: 5, height: 1.4 }], [true]],
+	// [[{ age: 3, height: 1.5 }], [false]],
+	// [[{ age: 4, height: 1.5 }], [false]],
+	// [[{ age: 5, height: 1.3 }], [false]],
+	// [[{ age: 5, height: 1.4 }], [true]],
+	// [[{ age: 21, height: 1.3 }], [true]],
+	// FAILING TESTS
+	[[{ age: 3, height: 1.5 }], [true]],
+	[[{ age: 4, height: 1.5 }], [true]],
+	[[{ age: 5, height: 1.3 }], [true]],
+	[[{ age: 5, height: 1.4 }], [false]],
 	[[{ age: 21, height: 1.3 }], [true]],
 ])(`CanRide`, (visitors, expected) => {
-	test(`visitors: ${visitors.map(
-		(visitor, index) =>
-			`\nVisitor ${index} age ${visitor.age} height ${visitor.height} can ride: ${expected[index]}`
-	)}`, () => {
-		expect(canRide({ age: visitors[0].age, height: visitors[0].height })).toBe(
-			expected[0]
-		);
+	test(`Visitors (total: ${visitors.length}): 
+    ${visitors.map(
+			(visitor, index) =>
+				`\nVisitor ${index + 1} age ${visitor.age} height ${
+					visitor.height
+				} can ride: ${expected[index]}`
+		)}`, () => {
+		expect(canRide(visitors)).toStrictEqual(expected);
 	});
 });
