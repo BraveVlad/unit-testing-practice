@@ -11,6 +11,15 @@
 // 2.1. if the result is >= 10, sum both digits.
 // 3. sum all results.
 // 4. control digit = 10-(sum%10)
+
 export function isValidCreditCardNumber(number: string) {
+	const cardNumber = number.trim().split("").map(Number);
+	if (cardNumber.length < 2) return false;
+
+	const controlDigit = Number(cardNumber.pop());
+	console.log("control:", controlDigit);
+	console.log("number:", cardNumber);
 	return true;
 }
+
+isValidCreditCardNumber("12345674");
