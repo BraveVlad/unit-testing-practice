@@ -5,13 +5,16 @@
 // [ ] 3. Repeat
 
 // LUHN ALGORITHM VALIDATION STEPS:
-// 0. extract the control digit (right-most digit)
-// 1. start from right to left (reverse the array?)
-// 2. multiply BY 2 all even order numbers (every second digit)
-// 2.1. if the result is >= 10, sum both digits.
-// 3. sum all results.
-// 4. control digit = 10-(sum%10)
+// [x] 0. extract the control digit (right-most digit)
+// [x] 1. start from right to left (reverse the array?)
+// [ ] 2. multiply BY 2 all even order numbers (every second digit)
+// [ ] 2.1. if the result is >= 10, sum both digits.
+// [ ] 3. sum all results.
+// [ ] 4. control digit = 10-(sum%10)
 
+function sumTwoDigits(number: number) {
+	return ((number / 1) % 10) + Math.floor((number / 10) % 10);
+}
 export function isValidCreditCardNumber(number: string) {
 	const cardNumber = number.trim().split("").map(Number).reverse();
 	if (cardNumber.length < 2) return false;
@@ -19,7 +22,21 @@ export function isValidCreditCardNumber(number: string) {
 	const controlDigit = Number(cardNumber.shift());
 	console.log("control:", controlDigit);
 	console.log("number:", cardNumber);
-	return true;
+
+	const multipliedDigits = cardNumber.map((currentDigit, index) => {
+		if (index % 2) return currentDigit;
+
+		const multipliedDigit = currentDigit * 2;
+		return multipliedDigit >= 10
+			? sumTwoDigits(multipliedDigit)
+			: multipliedDigit;
+	});
+
+	const sumOfAllDigits = multipliedDigits.reduce(
+		(previouse, current) => previouse + current,
+		0
+	);
+	return controlDigit === 10 - (sumOfAllDigits % 10);
 }
 
-isValidCreditCardNumber("12345674");
+isValidCreditCardNumber("0000000000000");
