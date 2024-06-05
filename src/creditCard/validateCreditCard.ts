@@ -13,10 +13,10 @@
 // 4. control digit = 10-(sum%10)
 
 export function isValidCreditCardNumber(number: string) {
-	const cardNumber = number.trim().split("").map(Number);
+	const cardNumber = number.trim().split("").map(Number).reverse();
 	if (cardNumber.length < 2) return false;
 
-	const controlDigit = Number(cardNumber.pop());
+	const controlDigit = Number(cardNumber.shift());
 	console.log("control:", controlDigit);
 	console.log("number:", cardNumber);
 	return true;
