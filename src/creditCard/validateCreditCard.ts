@@ -16,29 +16,19 @@ function sumTwoDigits(number: number) {
 	return ((number / 1) % 10) + Math.floor((number / 10) % 10);
 }
 export function isValidCreditCardNumber(number: string) {
-	const cardNumber = number
-		.trim()
-		.replace(/[\s-]/g, "")
-		.split("")
-		.map(Number)
-		.reverse();
+	const cardNumber = number.replace(/[\s-]/g, "");
 	if (cardNumber.length < 2) return false;
-	const controlDigit = cardNumber.shift();
-	const multipliedDigits = cardNumber.map((currentDigit, index) => {
-		if (index % 2) return currentDigit;
 
-		const multipliedDigit = currentDigit * 2;
-		return multipliedDigit >= 10
-			? sumTwoDigits(multipliedDigit)
-			: multipliedDigit;
-	});
+	let sumOfDigits = 0;
+	for (let index = cardNumber.length - 1; index >= 0; index--) {
+		const digit = Number(cardNumber.at(index));
+		if (index % 2) sumOfDigits += digit;
+		else {
+			const multipliedDigit = digit * 2;
+			sumOfDigits +=
+				multipliedDigit > 9 ? multipliedDigit - 9 : multipliedDigit;
+		}
+	}
 
-	const sumOfAllDigits = multipliedDigits.reduce(
-		(previouse, current) => previouse + current,
-		0
-	);
-
-	return sumOfAllDigits === 0 && controlDigit === 0
-		? true
-		: controlDigit === 10 - (sumOfAllDigits % 10);
+	return sumOfDigits % 10 === 0;
 }
