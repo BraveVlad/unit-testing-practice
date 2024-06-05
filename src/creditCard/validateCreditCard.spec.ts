@@ -1,6 +1,6 @@
 import { isValidCreditCardNumber } from "./validateCreditCard";
 
-fdescribe("isValidCreditCardNumber", () => {
+describe("isValidCreditCardNumber", () => {
 	it("Valid card number: 4532015112830366", () =>
 		expect(isValidCreditCardNumber("4532015112830366")).toEqual(true));
 
@@ -15,6 +15,11 @@ fdescribe("isValidCreditCardNumber", () => {
 
 	it("Valid card number with mixed seperators: 4532-0151 1283 0366", () =>
 		expect(isValidCreditCardNumber("4532-0151 1283 0366")).toEqual(true));
+
+	it("Valid card number with trailing spaces:     4532015112830366      ", () =>
+		expect(isValidCreditCardNumber("    4532015112830366      ")).toEqual(
+			true
+		));
 
 	it("Valid card number with newline and tab characters: 4532015\\t112830366\\n", () =>
 		expect(isValidCreditCardNumber("4532015\t112830366\n")).toEqual(true));
@@ -45,7 +50,7 @@ fdescribe("isValidCreditCardNumber", () => {
 	it("Invalid single zero digit", () =>
 		expect(isValidCreditCardNumber("0")).toEqual(false));
 });
-fdescribe.each([
+describe.each([
 	["378282246310005", true],
 	["371449635398431", true],
 	["378734493671000", true],
