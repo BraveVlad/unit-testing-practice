@@ -16,7 +16,12 @@ function sumTwoDigits(number: number) {
 	return ((number / 1) % 10) + Math.floor((number / 10) % 10);
 }
 export function isValidCreditCardNumber(number: string) {
-	const cardNumber = number.trim().split("").map(Number).reverse();
+	const cardNumber = number
+		.trim()
+		.replace(/[\s-]/g, "")
+		.split("")
+		.map(Number)
+		.reverse();
 	if (cardNumber.length < 2) return false;
 	const controlDigit = cardNumber.shift();
 	const multipliedDigits = cardNumber.map((currentDigit, index) => {
