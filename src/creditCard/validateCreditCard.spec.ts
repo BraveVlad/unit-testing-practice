@@ -20,6 +20,12 @@ fdescribe.each([
 
 	["0000000000000", true],
 	["1111111111111", false],
+
+	["1", false],
+	["0", false],
+
+	["42", true],
+	["43", false],
 ])(`isValidCreditCardNumber`, (cardNumber, expected) => {
 	test(`Credit card: [${cardNumber}] should be ${
 		expected ? `valid` : `invalid`
