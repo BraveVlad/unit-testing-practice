@@ -2,6 +2,7 @@ import { isValidCreditCardNumber } from "./validateCreditCard";
 
 fdescribe.each([
 	["12345674", true],
+	["00012345674", true],
 	["12435674", false],
 	["1234567", false],
 
