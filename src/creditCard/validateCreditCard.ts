@@ -36,7 +36,8 @@ export function isValidCreditCardNumber(number: string) {
 		(previouse, current) => previouse + current,
 		0
 	);
-	return controlDigit === 10 - (sumOfAllDigits % 10);
-}
 
-isValidCreditCardNumber("0000000000000");
+	return sumOfAllDigits === 0 && controlDigit === 0
+		? true
+		: controlDigit === 10 - (sumOfAllDigits % 10);
+}
